@@ -150,3 +150,4 @@
 /Users/mesut/RiderProjects/CrashCourse/PayGateX/obj/Debug/net8.0/PayGateX.pdb
 /Users/mesut/RiderProjects/CrashCourse/PayGateX/obj/Debug/net8.0/PayGateX.genruntimeconfig.cache
 /Users/mesut/RiderProjects/CrashCourse/PayGateX/obj/Debug/net8.0/ref/PayGateX.dll
+/Users/mesut/RiderProjects/CrashCourse/PayGateX/obj/Debug/net8.0/PayGateX.sourcelink.json

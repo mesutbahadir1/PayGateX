@@ -29,6 +29,7 @@ public class CardController:ControllerBase
         _cardStatusRepository = cardStatusRepository;
     }
 
+    [Authorize(Roles = "Admin")]
     [HttpGet]
     public async Task<IActionResult> GetAllCards()
     {
@@ -48,7 +49,7 @@ public class CardController:ControllerBase
         return Ok(card.ToCardDto());
     }
     
-    [Authorize]
+    [Authorize(Roles = "Admin")]
     [HttpPost("{customerId}/{cardTypeId}/{cardStatusId}/{productTypeId}")]
     public async Task<IActionResult> CreateCard([FromRoute] int customerId,[FromRoute] int cardTypeId,[FromRoute] int cardStatusId,
         [FromRoute] int productTypeId,[FromBody] CreateCardDto createCardDto)

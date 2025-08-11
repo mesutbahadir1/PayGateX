@@ -50,25 +50,25 @@ namespace PayGateX.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "7afa680f-3e0c-4e78-a10c-6f466e0f5ba9",
+                            Id = "fbccfc20-c9d3-4b98-92c7-49f4dea8d093",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "8ea5136a-b965-471c-82fc-3f2332f00051",
+                            Id = "bcf99d1f-1bca-449d-b722-4a53c822d7a0",
                             Name = "Manager",
                             NormalizedName = "MANAGER"
                         },
                         new
                         {
-                            Id = "97df79bd-2e48-4fe8-8505-8a482e57e44f",
+                            Id = "a75d8f47-60a9-40e7-b17d-7fe73c711daa",
                             Name = "CustomerSupport",
                             NormalizedName = "CUSTOMERSUPPORT"
                         },
                         new
                         {
-                            Id = "bbbac41d-211e-46d5-902a-edccda9c9087",
+                            Id = "741643a1-0497-4ba9-bfeb-eadb4efcc956",
                             Name = "User",
                             NormalizedName = "USER"
                         });
@@ -225,6 +225,10 @@ namespace PayGateX.Migrations
 
                     b.Property<bool>("PhoneNumberConfirmed")
                         .HasColumnType("boolean");
+
+                    b.Property<string>("Role")
+                        .IsRequired()
+                        .HasColumnType("text");
 
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("text");

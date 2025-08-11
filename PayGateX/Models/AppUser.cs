@@ -5,6 +5,8 @@ namespace PayGateX.Entities;
 public class AppUser:IdentityUser
 {
     public string FullName { get; set; }
+    
+    public string Role { get; set; }
 
     // Navigation Properties
     public List<Customer> CreatedCustomers { get; set; }      // Kendi oluşturduğu müşteriler

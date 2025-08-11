@@ -31,18 +31,32 @@ public class AccountController:ControllerBase
                 UserName = registerDto.UserName,
                 FullName = registerDto.FullName!,
                 Email = registerDto.Email,
+                Role = registerDto.Role!
             };
             var createUser = await _userManager.CreateAsync(appUser,registerDto.Password);
 
             if (createUser.Succeeded)
             {
-                var roleResult = await _userManager.AddToRoleAsync(appUser, "User");
+                IdentityResult roleResult;
+                if (appUser.Role=="Admin") {
+                    roleResult = await _userManager.AddToRoleAsync(appUser, "Admin");
+                }else if (appUser.Role=="CustomerSupport"){
+                    roleResult = await _userManager.AddToRoleAsync(appUser, "CustomerSupport");
+                }else if (appUser.Role=="Manager"){
+                    roleResult = await _userManager.AddToRoleAsync(appUser, "Manager");
+                }
+                else
+                {
+                    roleResult = await _userManager.AddToRoleAsync(appUser, "User");
+                }
+               
                 if (roleResult.Succeeded)
                 {
                     return Ok(new NewUserDto
                     {
                         UserName = appUser.UserName,
                         FullName = appUser.FullName,
+                        Role = appUser.Role,
                         Email = appUser.Email,
                         Token =  _tokenService.CreateToken(appUser)
                     });
@@ -68,7 +82,7 @@ public class AccountController:ControllerBase
     [HttpPost("login")]
     public async Task<IActionResult> Login(LoginDto loginDto)
     {
-        var user = await _userManager.Users.FirstOrDefaultAsync(x => x.UserName == loginDto.UserName!.ToLower());
+        var user = await _userManager.Users.FirstOrDefaultAsync(x => x.UserName == loginDto.UserName);
         if (user == null)
         {
             return Unauthorized("User not found");
@@ -85,6 +99,7 @@ public class AccountController:ControllerBase
         {
             UserName = user.UserName,
             FullName = user.FullName,
+            Role = user.Role,
             Email = user.Email,
             Token = _tokenService.CreateToken(user)
         });
