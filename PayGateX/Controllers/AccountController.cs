@@ -8,7 +8,7 @@ using PayGateX.Interfaces;
 namespace PayGateX.Controllers;
 
 [ApiController]
-[Route("api/[controller]")]
+[Route("api/[controller]/[action]")]
 public class AccountController:ControllerBase
 {
     private readonly UserManager<AppUser> _userManager;

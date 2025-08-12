@@ -9,7 +9,7 @@ using PayGateX.Mappers;
 
 namespace PayGateX.Controllers;
 [ApiController]
-[Route("api/[controller]")]
+[Route("api/[controller]/[action]")]
 public class CardController:ControllerBase
 {
     private readonly ICardRepository _cardRepository;

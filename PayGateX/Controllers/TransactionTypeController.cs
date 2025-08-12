@@ -5,7 +5,7 @@ using PayGateX.Mappers;
 
 namespace PayGateX.Controllers;
 [ApiController]
-[Route("api/[controller]")]
+[Route("api/[controller]/[action]")]
 public class TransactionTypeController:ControllerBase
 {
     private readonly ITransactionTypeRepository _transactionTypeRepository;

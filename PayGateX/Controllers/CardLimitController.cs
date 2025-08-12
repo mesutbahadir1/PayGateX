@@ -10,7 +10,7 @@ using PayGateX.Mappers;
 
 namespace PayGateX.Controllers;
 [ApiController]
-[Route("api/[controller]")]
+[Route("api/[controller]/[action]")]
 public class CardLimitController:ControllerBase
 {
     private readonly ICardLimitRepository _cardLimitRepository;

@@ -10,7 +10,7 @@ using PayGateX.Mappers;
 
 namespace PayGateX.Controllers;
 [ApiController]
-[Route("api/[controller]")]
+[Route("api/[controller]/[action]")]
 public class TransactionController:ControllerBase
 {
     private readonly ITransactionRepository _transactionRepository;
@@ -19,6 +19,7 @@ public class TransactionController:ControllerBase
     private readonly ITransactionTypeRepository _transactionTypeRepository;
     private readonly IPaymentMethodTypeRepository _paymentMethodTypeRepository;
     private readonly ICurrencyRepository _currencyRepository;
+   
     public TransactionController(ITransactionRepository transactionRepository, UserManager<AppUser> userManager, ICardRepository cardRepository, ITransactionTypeRepository transactionTypeRepository, IPaymentMethodTypeRepository paymentMethodTypeRepository, ICurrencyRepository currencyRepository)
     {
         _transactionRepository = transactionRepository;
@@ -33,7 +34,9 @@ public class TransactionController:ControllerBase
     public async Task<IActionResult> GetAllTransactions()
     {
         var allTransactions = await _transactionRepository.GetAllTransaction();
+        
         return Ok(allTransactions.Select(x=>x.ToTransactionDto()));
+        
     }
     
     [HttpGet("{id}")]
@@ -83,7 +86,10 @@ public class TransactionController:ControllerBase
         
         var transactionModel = createTransactionDto.ToTransactionFromCreateDto(cardId,appUser.Id,transactionTypeId,paymentMethodTypeId,currencyId);
 
-        await _transactionRepository.CreateTransaction(transactionModel);
+        var model = await _transactionRepository.CreateTransaction(transactionModel);
+
+        if (model == null)
+            return BadRequest("There is no enough limit");
 
         return Ok(transactionModel.ToTransactionDto());
     }

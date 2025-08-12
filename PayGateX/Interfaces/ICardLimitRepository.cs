@@ -13,4 +13,6 @@ public interface ICardLimitRepository
     Task<CardLimit> UpdateCardLimit(int id, CardLimit cardLimit);
     
     Task<CardLimit> DeleteCardLimit(int id);
+    
+    Task<CardLimit> GetCardLimitByCardId(int cardId);
 }

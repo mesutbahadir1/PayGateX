@@ -8,9 +8,13 @@ namespace PayGateX.Repository;
 public class TransactionRepository:ITransactionRepository
 {
     private readonly ApplicationDBContext _context;
-    public TransactionRepository(ApplicationDBContext context)
+    private readonly ITcmbCurrencyService _currencyService;
+    private readonly ICardLimitRepository _cardLimitRepository;
+    public TransactionRepository(ApplicationDBContext context, ITcmbCurrencyService currencyService, ICardLimitRepository cardLimitRepository)
     {
         _context = context;
+        _currencyService = currencyService;
+        _cardLimitRepository = cardLimitRepository;
     }
     public async Task<List<Transaction>> GetAllTransaction()
     {
@@ -28,9 +32,32 @@ public class TransactionRepository:ITransactionRepository
 
     public async Task<Transaction> CreateTransaction(Transaction transaction)
     {
-        await _context.Transactions.AddAsync(transaction);
-        await _context.SaveChangesAsync();
-        return transaction;
+        var usd = await _currencyService.GetUsdTryRateAsync();
+        var euro = await _currencyService.GetEurTryRateAsync();
+        var cardLimit = await _cardLimitRepository.GetCardLimitByCardId(transaction.CardId);
+
+        var transactionAmount = transaction.Amount;
+        if (transaction.CurrencyId==4)
+        {
+            transactionAmount *= usd;
+        }
+        if (transaction.CurrencyId == 5)
+        {
+            transactionAmount *= euro;
+        }
+        
+
+        if (transactionAmount<=cardLimit.AvailableLimit)
+        {
+            cardLimit.UsedLimit += transactionAmount;
+            await _context.Transactions.AddAsync(transaction);
+            await _context.SaveChangesAsync();
+            return transaction;
+        }
+        else
+        {
+            return null;
+        }
     }
 
     public async Task<Transaction> UpdateTransaction(int id, Transaction transaction)

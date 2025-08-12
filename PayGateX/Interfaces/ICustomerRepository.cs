@@ -15,4 +15,5 @@ public interface ICustomerRepository
     Task<Customer> DeleteCustomer(int id);
     
     Task<bool> IsCustomerExist(int id);
+    Task<List<Card>> GetCustomerCards(int customerId);
 }

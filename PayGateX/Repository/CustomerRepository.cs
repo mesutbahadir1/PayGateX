@@ -69,4 +69,16 @@ public class CustomerRepository:ICustomerRepository
     {
         return await _context.Customers.AnyAsync(x=>x.Id==id);
     }
+
+    public async Task<List<Card>> GetCustomerCards(int customerId)
+    {
+        var customer = await _context.Customers.FindAsync(customerId);
+        if (customer==null)
+        {
+            return null;
+        }
+
+        var allCustomerCards = await _context.Cards.Where(x => x.CustomerId == customerId).ToListAsync();
+        return allCustomerCards;
+    }
 }

@@ -85,7 +85,6 @@ builder.Services.AddAuthentication(options =>
     };
 }); 
 
-
 builder.Services.AddScoped<ITokenService,TokenService>();
 builder.Services.AddScoped<ICustomerTypeRepository,CustomerTypeRepository>();
 builder.Services.AddScoped<ICustomerRepository,CustomerRepository>();
@@ -99,6 +98,7 @@ builder.Services.AddScoped<ICurrencyRepository,CurrencyRepository>();
 builder.Services.AddScoped<ICardRepository,CardRepository>();
 builder.Services.AddScoped<ICardLimitRepository,CardLimitRepository>();
 builder.Services.AddScoped<ITransactionRepository,TransactionRepository>();
+builder.Services.AddHttpClient<ITcmbCurrencyService, TcmbCurrencyService>();
 
 var app = builder.Build();
 

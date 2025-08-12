@@ -9,7 +9,7 @@ using PayGateX.Mappers;
 
 namespace PayGateX.Controllers;
 [ApiController]
-[Route("api/[controller]")]
+[Route("api/[controller]/[action]")]
 public class CustomerController:ControllerBase
 {
     private readonly ICustomerRepository _repository;
@@ -42,6 +42,23 @@ public class CustomerController:ControllerBase
 
         return Ok(customer.ToCustomerDto());
     }
+    
+    
+    [HttpGet("{customerId}/cards")]
+    public async Task<IActionResult> GetCustomerCardsById([FromRoute] int customerId)
+    {
+        var customerCards = await _repository.GetCustomerCards(customerId);
+        if (customerCards==null)
+        {
+            return NotFound("Customer doesn't exist or there is no card for this customer.");
+        }
+
+        var customerCardsDto = customerCards.Select(x => x.ToCardDto());
+        return Ok(customerCardsDto);
+    }
+    
+    
+    
     
     [Authorize]
     [HttpPost("{customerTypeId}")]

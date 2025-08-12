@@ -6,7 +6,7 @@ using PayGateX.Mappers;
 namespace PayGateX.Controllers;
 
 [ApiController]
-[Route("api/[controller]")]
+[Route("api/[controller]/[action]")]
 public class ProductTypeController:ControllerBase
 {
     private readonly IProductTypeRepository _productTypeRepository;

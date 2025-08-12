@@ -55,4 +55,13 @@ public class CardLimitRepository:ICardLimitRepository
         await _context.SaveChangesAsync();
         return existCardLimit;
     }
+
+    public async Task<CardLimit> GetCardLimitByCardId(int cardId)
+    {
+        var cardLimitObject = await _context.CardLimits.Where(x => x.CardId == cardId).FirstOrDefaultAsync();
+        if (cardLimitObject == null)
+            return null;
+        
+        return cardLimitObject;
+    }
 }

@@ -6,7 +6,7 @@ using PayGateX.Interfaces;
 namespace PayGateX.Controllers;
 
 [ApiController]
-[Route("api/[controller]")]
+[Route("api/[controller]/[action]")]
 public class CustomerTypeController:ControllerBase
 {
     private readonly ICustomerTypeRepository _repository;
