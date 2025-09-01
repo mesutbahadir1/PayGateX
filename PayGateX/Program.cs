@@ -45,6 +45,9 @@ builder.Services.AddSwaggerGen(option =>
     });
 });
 
+builder.Logging.ClearProviders();
+builder.Logging.AddConsole();
+builder.Logging.AddDebug();
 
 builder.Services.AddControllers().AddNewtonsoftJson(options =>
 {

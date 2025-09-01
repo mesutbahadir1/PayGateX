@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -19,8 +20,9 @@ public class TransactionController:ControllerBase
     private readonly ITransactionTypeRepository _transactionTypeRepository;
     private readonly IPaymentMethodTypeRepository _paymentMethodTypeRepository;
     private readonly ICurrencyRepository _currencyRepository;
+    private readonly ILogger<TransactionController> _logger;
    
-    public TransactionController(ITransactionRepository transactionRepository, UserManager<AppUser> userManager, ICardRepository cardRepository, ITransactionTypeRepository transactionTypeRepository, IPaymentMethodTypeRepository paymentMethodTypeRepository, ICurrencyRepository currencyRepository)
+    public TransactionController(ITransactionRepository transactionRepository, UserManager<AppUser> userManager, ICardRepository cardRepository, ITransactionTypeRepository transactionTypeRepository, IPaymentMethodTypeRepository paymentMethodTypeRepository, ICurrencyRepository currencyRepository, ILogger<TransactionController> logger)
     {
         _transactionRepository = transactionRepository;
         _userManager = userManager;
@@ -28,15 +30,15 @@ public class TransactionController:ControllerBase
         _transactionTypeRepository = transactionTypeRepository;
         _paymentMethodTypeRepository = paymentMethodTypeRepository;
         _currencyRepository = currencyRepository;
+        _logger = logger;
     }
     
     [HttpGet]
     public async Task<IActionResult> GetAllTransactions()
     {
         var allTransactions = await _transactionRepository.GetAllTransaction();
-        
+        _logger.LogInformation("Get All Transaction action has been called");
         return Ok(allTransactions.Select(x=>x.ToTransactionDto()));
-        
     }
     
     [HttpGet("{id}")]
