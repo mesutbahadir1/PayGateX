@@ -3,21 +3,22 @@ using Microsoft.AspNetCore.Mvc;
 using PayGateX.Dtos.CardStatus;
 using PayGateX.Interfaces;
 using PayGateX.Mappers;
+using PayGateX.Service.Contracts;
 
 namespace PayGateX.Controllers;
 [ApiController]
 [Route("api/[controller]/[action]")]
 public class CardStatusController:ControllerBase
 {
-    private readonly ICardStatusRepository _repository;
-    public CardStatusController(ICardStatusRepository repository)
+    private readonly ICardStatusService _cardStatusService;
+    public CardStatusController(ICardStatusService cardStatusService)
     {
-        _repository = repository;
+        _cardStatusService = cardStatusService;
     }
     [HttpGet]
     public async Task<IActionResult> GetAllCardStatus()
     {
-        var cardStatus = await _repository.GetAll();;
+        var cardStatus = await _cardStatusService.GetAll();;
         var cardStatusDto = cardStatus.Select(x => x.ToCardStatusDto());
         return Ok(cardStatusDto);
     }
@@ -25,7 +26,7 @@ public class CardStatusController:ControllerBase
     [HttpGet("{id}")]
     public async Task<IActionResult> GetCardStatusById([FromRoute]int id)
     {
-        var cardStatus = await _repository.GetById(id);
+        var cardStatus = await _cardStatusService.GetById(id);
         if (cardStatus==null)
             return NotFound("Card status not found");
         
@@ -36,14 +37,14 @@ public class CardStatusController:ControllerBase
     public async Task<IActionResult> CreateCardStatus([FromBody]CreateCardStatusDto cardStatusDto)
     {
         var cardStatus = cardStatusDto.ToCardStatusFromCreateDto();
-        var createCardStatus = await _repository.Create(cardStatus);
+        var createCardStatus = await _cardStatusService.Create(cardStatus);
         return CreatedAtAction(nameof(GetCardStatusById), new { id = createCardStatus.Id }, createCardStatus.ToCardStatusDto());
     }
     
     [HttpPut("{id}")]
     public async Task<IActionResult> UpdateCardStatus([FromRoute]int id,[FromBody] UpdateCardStatusDto cardStatusDto)
     {
-        var cardStatus = await _repository.Update(id, cardStatusDto.ToCardStatusFromUpdateDto());
+        var cardStatus = await _cardStatusService.Update(id, cardStatusDto.ToCardStatusFromUpdateDto());
         if (cardStatus == null)
             return NotFound("Card status not found");
 
@@ -53,7 +54,7 @@ public class CardStatusController:ControllerBase
     [HttpDelete("{id}")]
     public async Task<IActionResult> DeleteCardStatus([FromRoute] int id)
     {
-        var deletedCardStatus = await _repository.Delete(id);
+        var deletedCardStatus = await _cardStatusService.Delete(id);
         if (deletedCardStatus == null)
             return NotFound("Card status not found");
         

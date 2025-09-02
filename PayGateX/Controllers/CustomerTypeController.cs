@@ -3,6 +3,7 @@ using PayGateX.Mappers;
 using Microsoft.AspNetCore.Mvc;
 using PayGateX.Dtos.CustomerType;
 using PayGateX.Interfaces;
+using PayGateX.Service.Contracts;
 
 namespace PayGateX.Controllers;
 
@@ -10,17 +11,18 @@ namespace PayGateX.Controllers;
 [Route("api/[controller]/[action]")]
 public class CustomerTypeController:ControllerBase
 {
-    private readonly ICustomerTypeRepository _repository;
+    private readonly ICustomerTypeService _customerTypeService;
+    
         
-    public CustomerTypeController(ICustomerTypeRepository repository)
+    public CustomerTypeController(ICustomerTypeService customerTypeService)
     {
-        _repository = repository;
+        _customerTypeService = customerTypeService;
     }
 
     [HttpGet]
     public async Task<IActionResult> GetAllCustomerTypes()
     {
-        var customerTpyes = await _repository.GetAll();
+        var customerTpyes = await _customerTypeService.GetAll();
         var customerDtoTypes = customerTpyes.Select(x => x.ToCustomerTypeDto());
         return Ok(customerDtoTypes);
     } 
@@ -28,7 +30,7 @@ public class CustomerTypeController:ControllerBase
     [HttpGet("{id}")]
     public async Task<IActionResult> GetCustomerTypesById([FromRoute]int id)
     {
-        var customerTpye = await _repository.GetById(id);
+        var customerTpye = await _customerTypeService.GetById(id);
         if (customerTpye==null)
             return NotFound("Customer type not found");
         return Ok(customerTpye.ToCustomerTypeDto());
@@ -38,14 +40,14 @@ public class CustomerTypeController:ControllerBase
     public async Task<IActionResult> CreateCustomerType([FromBody]CreateCustomerTypeDto customerTypeDto)
     {
         var customerType = customerTypeDto.ToCustomerTypeFromCreateDto();
-        var createCustomerType = await _repository.Create(customerType);
+        var createCustomerType = await _customerTypeService.Create(customerType);
         return CreatedAtAction(nameof(GetCustomerTypesById), new { id = createCustomerType.Id }, createCustomerType.ToCustomerTypeDto());
     }
 
     [HttpPut("{id}")]
     public async Task<IActionResult> UpdateCustomerType([FromRoute] int id, [FromBody] UpdateCustomerTypeDto customerTypeDto)
     {
-        var updateCustomerType = await _repository.Update(id, customerTypeDto.ToCustomerTypeFromUpdateDto());
+        var updateCustomerType = await _customerTypeService.Update(id, customerTypeDto.ToCustomerTypeFromUpdateDto());
         if (updateCustomerType==null)
         {
             return NotFound("Customer type not found");
@@ -56,7 +58,7 @@ public class CustomerTypeController:ControllerBase
     [HttpDelete("{id}")]
     public async Task<IActionResult> DeleteCustomerType([FromRoute] int id)
     {
-        var deletedCustomerType = await _repository.Delete(id);
+        var deletedCustomerType = await _customerTypeService.Delete(id);
         if (deletedCustomerType == null)
         {
             return NotFound("Customer Type not found");

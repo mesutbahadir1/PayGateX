@@ -1393,6 +1393,20 @@
         "build": {
           "buildTransitive/netcoreapp3.1/_._": {}
         }
+      },
+      "Entities/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v8.0",
+        "dependencies": {
+          "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "8.0.11",
+          "Microsoft.Extensions.Identity.Core": "8.0.11"
+        },
+        "compile": {
+          "bin/placeholder/Entities.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Entities.dll": {}
+        }
       }
     }
   },
@@ -3628,10 +3642,16 @@
         "system.threading.channels.nuspec",
         "useSharedDesignerContext.txt"
       ]
+    },
+    "Entities/1.0.0": {
+      "type": "project",
+      "path": "../Entities/Entities.csproj",
+      "msbuildProject": "../Entities/Entities.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net8.0": [
+      "Entities >= 1.0.0",
       "Microsoft.AspNetCore.Authentication.JwtBearer >= 8.0.11",
       "Microsoft.AspNetCore.Identity.EntityFrameworkCore >= 8.0.11",
       "Microsoft.AspNetCore.Mvc.NewtonsoftJson >= 8.0.11",
@@ -3651,11 +3671,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/mesut/RiderProjects/CrashCourse/PayGateX/PayGateX.csproj",
+      "projectUniqueName": "/Users/mesut/RiderProjects/PayGateX/PayGateX/PayGateX.csproj",
       "projectName": "PayGateX",
-      "projectPath": "/Users/mesut/RiderProjects/CrashCourse/PayGateX/PayGateX.csproj",
+      "projectPath": "/Users/mesut/RiderProjects/PayGateX/PayGateX/PayGateX.csproj",
       "packagesPath": "/Users/mesut/.nuget/packages/",
-      "outputPath": "/Users/mesut/RiderProjects/CrashCourse/PayGateX/obj/",
+      "outputPath": "/Users/mesut/RiderProjects/PayGateX/PayGateX/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/Users/mesut/.nuget/NuGet/NuGet.Config"
@@ -3669,7 +3689,11 @@
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "/Users/mesut/RiderProjects/PayGateX/Entities/Entities.csproj": {
+              "projectPath": "/Users/mesut/RiderProjects/PayGateX/Entities/Entities.csproj"
+            }
+          }
         }
       },
       "warningProperties": {

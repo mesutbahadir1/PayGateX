@@ -2,6 +2,8 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PayGateX", "PayGateX\PayGateX.csproj", "{2EE242E5-ECCC-43D3-B755-06094091A2E2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Entities", "Entities\Entities.csproj", "{08E34335-C68E-4CC7-A800-6EE6A55577DA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -12,5 +14,9 @@ Global
 		{2EE242E5-ECCC-43D3-B755-06094091A2E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2EE242E5-ECCC-43D3-B755-06094091A2E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2EE242E5-ECCC-43D3-B755-06094091A2E2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{08E34335-C68E-4CC7-A800-6EE6A55577DA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{08E34335-C68E-4CC7-A800-6EE6A55577DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{08E34335-C68E-4CC7-A800-6EE6A55577DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{08E34335-C68E-4CC7-A800-6EE6A55577DA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

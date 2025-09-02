@@ -63,9 +63,14 @@ public class TransactionRepository:ITransactionRepository
     public async Task<Transaction> UpdateTransaction(int id, Transaction transaction)
     {
         var existTransaction = await _context.Transactions.FindAsync(id);
+    
         if (existTransaction==null)
             return null;
 
+        var cardLimit = await _cardLimitRepository.GetCardLimitByCardId(existTransaction.CardId);
+        var difference = transaction.Amount - existTransaction.Amount;
+        cardLimit.UsedLimit += difference;
+        
         existTransaction.Amount = transaction.Amount;
         existTransaction.Description = transaction.Description;
         await _context.SaveChangesAsync();

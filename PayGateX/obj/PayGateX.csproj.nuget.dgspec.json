@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/Users/mesut/RiderProjects/CrashCourse/PayGateX/PayGateX.csproj": {}
+    "/Users/mesut/RiderProjects/PayGateX/PayGateX/PayGateX.csproj": {}
   },
   "projects": {
-    "/Users/mesut/RiderProjects/CrashCourse/PayGateX/PayGateX.csproj": {
+    "/Users/mesut/RiderProjects/PayGateX/Entities/Entities.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/mesut/RiderProjects/CrashCourse/PayGateX/PayGateX.csproj",
-        "projectName": "PayGateX",
-        "projectPath": "/Users/mesut/RiderProjects/CrashCourse/PayGateX/PayGateX.csproj",
+        "projectUniqueName": "/Users/mesut/RiderProjects/PayGateX/Entities/Entities.csproj",
+        "projectName": "Entities",
+        "projectPath": "/Users/mesut/RiderProjects/PayGateX/Entities/Entities.csproj",
         "packagesPath": "/Users/mesut/.nuget/packages/",
-        "outputPath": "/Users/mesut/RiderProjects/CrashCourse/PayGateX/obj/",
+        "outputPath": "/Users/mesut/RiderProjects/PayGateX/Entities/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/Users/mesut/.nuget/NuGet/NuGet.Config"
@@ -26,6 +26,78 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        }
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "dependencies": {
+            "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[8.0.11, )"
+            },
+            "Microsoft.Extensions.Identity.Core": {
+              "target": "Package",
+              "version": "[8.0.11, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/Users/mesut/.dotnet/sdk/8.0.404/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/Users/mesut/RiderProjects/PayGateX/PayGateX/PayGateX.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Users/mesut/RiderProjects/PayGateX/PayGateX/PayGateX.csproj",
+        "projectName": "PayGateX",
+        "projectPath": "/Users/mesut/RiderProjects/PayGateX/PayGateX/PayGateX.csproj",
+        "packagesPath": "/Users/mesut/.nuget/packages/",
+        "outputPath": "/Users/mesut/RiderProjects/PayGateX/PayGateX/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/Users/mesut/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {
+              "/Users/mesut/RiderProjects/PayGateX/Entities/Entities.csproj": {
+                "projectPath": "/Users/mesut/RiderProjects/PayGateX/Entities/Entities.csproj"
+              }
+            }
           }
         },
         "warningProperties": {

@@ -3,22 +3,23 @@ using Microsoft.AspNetCore.Mvc;
 using PayGateX.Dtos.TransactionType;
 using PayGateX.Interfaces;
 using PayGateX.Mappers;
+using PayGateX.Service.Contracts;
 
 namespace PayGateX.Controllers;
 [ApiController]
 [Route("api/[controller]/[action]")]
 public class TransactionTypeController:ControllerBase
 {
-    private readonly ITransactionTypeRepository _transactionTypeRepository;
-    public TransactionTypeController(ITransactionTypeRepository transactionTypeRepository)
+    private readonly ITransactionTypeService _transactionTypeService;
+    public TransactionTypeController(ITransactionTypeService transactionTypeService)
     {
-        _transactionTypeRepository = transactionTypeRepository;
+        _transactionTypeService = transactionTypeService;
     }
     
     [HttpGet]
     public async Task<IActionResult> GetAllTransactionTypes()
     {
-        var transactionTypes = await _transactionTypeRepository.GetAll();;
+        var transactionTypes = await _transactionTypeService.GetAll();;
         var transactionTypesDto = transactionTypes.Select(x => x.ToTransactionTypeDto());
         return Ok(transactionTypesDto);
     }
@@ -26,7 +27,7 @@ public class TransactionTypeController:ControllerBase
     [HttpGet("{id}")]
     public async Task<IActionResult> GetTransactionTypeById([FromRoute]int id)
     {
-        var transactionType = await _transactionTypeRepository.GetById(id);
+        var transactionType = await _transactionTypeService.GetById(id);
         if (transactionType==null)
             return NotFound("Transaction type not found");
         return Ok(transactionType.ToTransactionTypeDto());
@@ -36,7 +37,7 @@ public class TransactionTypeController:ControllerBase
     public async Task<IActionResult> CreateTransactionType([FromBody]CreateTransactionTypeDto transactionTypeDto)
     {
         var transactionType = transactionTypeDto.ToTransactionTypeFromCreateDto();
-        var createTransactionType = await _transactionTypeRepository.Create(transactionType);
+        var createTransactionType = await _transactionTypeService.Create(transactionType);
         return CreatedAtAction(nameof(GetTransactionTypeById), new { id = createTransactionType.Id }, createTransactionType.ToTransactionTypeDto());
     }
     
@@ -44,7 +45,7 @@ public class TransactionTypeController:ControllerBase
     [HttpPut("{id}")]
     public async Task<IActionResult> UpdateTransactionType([FromRoute]int id,[FromBody] UpdateTransactionTypeDto transactionTypeDto)
     {
-        var transactionType = await _transactionTypeRepository.Update(id, transactionTypeDto.ToTransactionTypeFromUpdateDto());
+        var transactionType = await _transactionTypeService.Update(id, transactionTypeDto.ToTransactionTypeFromUpdateDto());
         if (transactionType == null)
             return NotFound("Transaction type not found");
 
@@ -54,7 +55,7 @@ public class TransactionTypeController:ControllerBase
     [HttpDelete("{id}")]
     public async Task<IActionResult> DeleteCardStatus([FromRoute] int id)
     {
-        var deletedTransactionType = await _transactionTypeRepository.Delete(id);
+        var deletedTransactionType = await _transactionTypeService.Delete(id);
         if (deletedTransactionType == null)
             return NotFound("Transaction type not found");
         

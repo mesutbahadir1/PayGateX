@@ -7,41 +7,32 @@ using PayGateX.Entities;
 using PayGateX.Extensions;
 using PayGateX.Interfaces;
 using PayGateX.Mappers;
+using PayGateX.Service.Contracts;
 
 namespace PayGateX.Controllers;
 [ApiController]
 [Route("api/[controller]/[action]")]
 public class CardController:ControllerBase
 {
-    private readonly ICardRepository _cardRepository;
-    private readonly UserManager<AppUser> _userManager; 
-    private readonly ICustomerRepository _customerRepository;
-    private readonly ICardTypeRepository _cardTypeRepository;
-    private readonly IProductTypeRepository _productTypeRepository;
-    private readonly ICardStatusRepository _cardStatusRepository;
-    public CardController(UserManager<AppUser> userManager,ICardRepository cardRepository, ICustomerRepository customerRepository,
-        ICardTypeRepository cardTypeRepository, IProductTypeRepository productTypeRepository, ICardStatusRepository cardStatusRepository)
+    private readonly ICardService _cardService;
+    
+    public CardController(ICardService cardService)
     {
-        _userManager = userManager;
-        _cardRepository = cardRepository;
-        _customerRepository = customerRepository;
-        _cardTypeRepository = cardTypeRepository;
-        _productTypeRepository = productTypeRepository;
-        _cardStatusRepository = cardStatusRepository;
+        _cardService = cardService;
     }
 
-    [Authorize(Roles = "Admin")]
+    //[Authorize(Roles = "Admin")]
     [HttpGet]
     public async Task<IActionResult> GetAllCards()
     {
-        var allCards = await _cardRepository.GetAllCard();
+        var allCards = await _cardService.GetAllCards();
         return Ok(allCards.Select(x=>x.ToCardDto()));
     }
     
     [HttpGet("{id}")]
     public async Task<IActionResult> GetCardById([FromRoute] int id)
     {
-        var card = await _cardRepository.GetCardById(id);
+        var card = await _cardService.GetCardById(id);
         if (card==null)
         {
             return NotFound("Card doesn't exist");
@@ -56,36 +47,13 @@ public class CardController:ControllerBase
         [FromRoute] int productTypeId,[FromBody] CreateCardDto createCardDto)
     {
         var userName = User.GetUserName();
-        var appUser = await _userManager.FindByNameAsync(userName);
 
-        var isCustomerExist = await _customerRepository.IsCustomerExist(customerId);
-        if (!isCustomerExist)
+        var cardModel = await _cardService.CreateCard(customerId, cardTypeId, cardStatusId, productTypeId,
+            createCardDto, userName);
+        if (cardModel==null)
         {
-            return BadRequest("Customer not found");
+            return BadRequest("Card not created. Check the information.");
         }
-        
-        
-        var isCardTypeExist = await _cardTypeRepository.IsCardTypeExist(cardTypeId);
-        if (!isCardTypeExist)
-        {
-            return BadRequest("Card type not found");
-        }
-        
-        var isProductTypeExist = await _productTypeRepository.IsProductTypeExist(productTypeId);
-        if (!isProductTypeExist)
-        {
-            return BadRequest("Product type not found");
-        }
-        
-        var isCardStatusExist = await _cardStatusRepository.IsCardStatusExist(cardStatusId);
-        if (!isCardStatusExist)
-        {
-            return BadRequest("Card status not found");
-        }
-        
-        var cardModel = createCardDto.ToCardFromCreateDto(customerId,appUser.Id,cardTypeId,cardStatusId,productTypeId);
-
-        await _cardRepository.CreateCard(cardModel);
 
         return Ok(cardModel.ToCardDto());
     }
@@ -93,7 +61,7 @@ public class CardController:ControllerBase
     [HttpPut("{id}")]
     public async Task<IActionResult> UpdateCard([FromRoute] int id,[FromBody] UpdateCardDto updateCardDto)
     {
-        var cardModel = await _cardRepository.UpdateCard(id, updateCardDto.ToCardFromUpdateDto());
+        var cardModel = await _cardService.UpdateCard(id, updateCardDto.ToCardFromUpdateDto());
         if (cardModel==null)
         {
             return NotFound("Card not found");
@@ -106,7 +74,7 @@ public class CardController:ControllerBase
     [HttpDelete("{id}")]
     public async Task<IActionResult> DeleteCard([FromRoute] int id)
     {
-        var cardModel = await _cardRepository.DeleteCard(id);
+        var cardModel = await _cardService.DeleteCard(id);
         if (cardModel==null)
         {
             return NotFound("Card not found");
@@ -114,9 +82,5 @@ public class CardController:ControllerBase
 
         return Ok(cardModel.ToCardDto());
     }
-    
-    
-    
-    
     
 }

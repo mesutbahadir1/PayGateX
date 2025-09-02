@@ -8,35 +8,31 @@ using PayGateX.Entities;
 using PayGateX.Extensions;
 using PayGateX.Interfaces;
 using PayGateX.Mappers;
+using PayGateX.Service.Contracts;
 
 namespace PayGateX.Controllers;
 [ApiController]
 [Route("api/[controller]/[action]")]
 public class CardLimitController:ControllerBase
 {
-    private readonly ICardLimitRepository _cardLimitRepository;
-    private readonly UserManager<AppUser> _userManager;
-    private readonly ICurrencyRepository _currencyRepository;
-    private readonly ICardRepository _cardRepository;
-    public CardLimitController(ICardLimitRepository cardLimitRepository, UserManager<AppUser> userManager, ICurrencyRepository currencyRepository, ICardRepository cardRepository)
+    private readonly ICardLimitService _cardLimitService;
+   
+    public CardLimitController(ICardLimitService cardLimitService)
     {
-        _cardLimitRepository = cardLimitRepository;
-        _userManager = userManager;
-        _currencyRepository = currencyRepository;
-        _cardRepository = cardRepository;
+        _cardLimitService = cardLimitService;
     }
     
     [HttpGet]
     public async Task<IActionResult> GetAllCardLimits()
     {
-        var allCardLimits = await _cardLimitRepository.GetAllCardLimits();
+        var allCardLimits = await _cardLimitService.GetAllCardLimits();
         return Ok(allCardLimits.Select(x=>x.ToCardLimitDto()));
     }
     
     [HttpGet("{id}")]
     public async Task<IActionResult> GetCardLimitById([FromRoute] int id)
     {
-        var cardLimit = await _cardLimitRepository.GetCardLimitById(id);
+        var cardLimit = await _cardLimitService.GetCardLimitById(id);
         if (cardLimit==null)
             return NotFound("Card limit doesn't exist");
 
@@ -47,19 +43,11 @@ public class CardLimitController:ControllerBase
     public async Task<IActionResult> CreateCardLimit([FromRoute] int currencyId,[FromRoute] int cardId, [FromBody] CreateCardLimitDto createCardLimitDto)
     {
 
-        var isCurrencyExist = await _currencyRepository.IsCurrencyExist(currencyId);
-        if (!isCurrencyExist)
-            return BadRequest("Currency not found");
-        
-        
-        var isCardTExist = await _cardRepository.IsCardExist(cardId);
-        if (!isCardTExist)
-            return BadRequest("Card type not found");
-        
-        var cardLimitModel = createCardLimitDto.ToCardLimitFromCreateDto(currencyId,cardId);
+        var cardLimitModel = await _cardLimitService.CreateCardLimit(currencyId, cardId, createCardLimitDto);
 
-        await _cardLimitRepository.CreateCardLimit(cardLimitModel);
-
+        if (cardLimitModel == null)
+            return BadRequest("Card limit not created. Check the information.");
+        
         return Ok(cardLimitModel.ToCardLimitDto());
     }
     
@@ -67,7 +55,7 @@ public class CardLimitController:ControllerBase
     [HttpPut("{id}")]
     public async Task<IActionResult> UpdateCardLimit([FromRoute] int id,[FromBody] UpdateCardLimitDto updateCardLimitDto)
     {
-        var cardLimitModel = await _cardLimitRepository.UpdateCardLimit(id, updateCardLimitDto.ToCardLimitFromUpdateDto());
+        var cardLimitModel = await _cardLimitService.UpdateCardLimit(id, updateCardLimitDto.ToCardLimitFromUpdateDto());
         if (cardLimitModel==null)
             return NotFound("Card limit not found");
 
@@ -77,7 +65,7 @@ public class CardLimitController:ControllerBase
     [HttpDelete("{id}")]
     public async Task<IActionResult> DeleteCardLimit([FromRoute] int id)
     {
-        var cardLimitModel = await _cardLimitRepository.DeleteCardLimit(id);
+        var cardLimitModel = await _cardLimitService.DeleteCardLimit(id);
         if (cardLimitModel==null)
             return NotFound("Card limit not found");
 

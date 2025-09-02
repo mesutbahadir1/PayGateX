@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using PayGateX.Service.Contracts;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -102,6 +103,20 @@ builder.Services.AddScoped<ICardRepository,CardRepository>();
 builder.Services.AddScoped<ICardLimitRepository,CardLimitRepository>();
 builder.Services.AddScoped<ITransactionRepository,TransactionRepository>();
 builder.Services.AddHttpClient<ITcmbCurrencyService, TcmbCurrencyService>();
+
+builder.Services.AddScoped<ICardService, CardService>();
+builder.Services.AddScoped<ICardLimitService, CardLimitService>();
+builder.Services.AddScoped<ICardStatusService, CardStatusService>();
+builder.Services.AddScoped<ICardTypeService, CardTypeService>();
+builder.Services.AddScoped<ICurrencyService, CurrencyService>();
+builder.Services.AddScoped<ICustomerTypeService, CustomerTypeService>();
+builder.Services.AddScoped<IPaymentMethodTypeService, PaymentMethodTypeService>();
+builder.Services.AddScoped<IProductTypeService, ProductTypeService>();
+builder.Services.AddScoped<ITransactionTypeService, TransactionTypeService>();
+builder.Services.AddScoped<ICustomerService, CustomerService>();
+builder.Services.AddScoped<ITransactionService, TransactionService>();
+
+
 
 var app = builder.Build();
 

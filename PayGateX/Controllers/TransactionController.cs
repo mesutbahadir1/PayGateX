@@ -8,43 +8,30 @@ using PayGateX.Entities;
 using PayGateX.Extensions;
 using PayGateX.Interfaces;
 using PayGateX.Mappers;
+using PayGateX.Service.Contracts;
 
 namespace PayGateX.Controllers;
 [ApiController]
 [Route("api/[controller]/[action]")]
 public class TransactionController:ControllerBase
 {
-    private readonly ITransactionRepository _transactionRepository;
-    private readonly UserManager<AppUser> _userManager;
-    private readonly ICardRepository _cardRepository;
-    private readonly ITransactionTypeRepository _transactionTypeRepository;
-    private readonly IPaymentMethodTypeRepository _paymentMethodTypeRepository;
-    private readonly ICurrencyRepository _currencyRepository;
-    private readonly ILogger<TransactionController> _logger;
-   
-    public TransactionController(ITransactionRepository transactionRepository, UserManager<AppUser> userManager, ICardRepository cardRepository, ITransactionTypeRepository transactionTypeRepository, IPaymentMethodTypeRepository paymentMethodTypeRepository, ICurrencyRepository currencyRepository, ILogger<TransactionController> logger)
+    private readonly ITransactionService _transactionService;
+    public TransactionController(ITransactionService transactionService)
     {
-        _transactionRepository = transactionRepository;
-        _userManager = userManager;
-        _cardRepository = cardRepository;
-        _transactionTypeRepository = transactionTypeRepository;
-        _paymentMethodTypeRepository = paymentMethodTypeRepository;
-        _currencyRepository = currencyRepository;
-        _logger = logger;
+        _transactionService = transactionService;
     }
     
     [HttpGet]
     public async Task<IActionResult> GetAllTransactions()
     {
-        var allTransactions = await _transactionRepository.GetAllTransaction();
-        _logger.LogInformation("Get All Transaction action has been called");
+        var allTransactions = await _transactionService.GetAllTransaction();
         return Ok(allTransactions.Select(x=>x.ToTransactionDto()));
     }
     
     [HttpGet("{id}")]
     public async Task<IActionResult> GetTransactionById([FromRoute] int id)
     {
-        var transaction = await _transactionRepository.GetTransactionById(id);
+        var transaction = await _transactionService.GetTransactionById(id);
         if (transaction==null)
         {
             return NotFound("Transaction doesn't exist");
@@ -59,39 +46,8 @@ public class TransactionController:ControllerBase
         [FromRoute] int currencyId,[FromBody] CreateTransactionDto createTransactionDto)
     {
         var userName = User.GetUserName();
-        var appUser = await _userManager.FindByNameAsync(userName);
-
-        var isCardExist = await _cardRepository.IsCardExist(cardId);
-        if (!isCardExist)
-        {
-            return BadRequest("Card not found");
-        }
-        
-        
-        var isTransactionTypeExist = await _transactionTypeRepository.IsTransactionTypeExist(transactionTypeId);
-        if (!isTransactionTypeExist)
-        {
-            return BadRequest("Transaction type not found");
-        }
-        
-        var isPaymentMethodTypeExist = await _paymentMethodTypeRepository.IsPaymentMethodTypeExist(paymentMethodTypeId);
-        if (!isPaymentMethodTypeExist)
-        {
-            return BadRequest("Payment method type not found");
-        }
-        
-        var isCurrencyExist = await _currencyRepository.IsCurrencyExist(currencyId);
-        if (!isCurrencyExist)
-        {
-            return BadRequest("Currency not found");
-        }
-        
-        var transactionModel = createTransactionDto.ToTransactionFromCreateDto(cardId,appUser.Id,transactionTypeId,paymentMethodTypeId,currencyId);
-
-        var model = await _transactionRepository.CreateTransaction(transactionModel);
-
-        if (model == null)
-            return BadRequest("There is no enough limit");
+        var transactionModel = await _transactionService.CreateTransaction(cardId, transactionTypeId,
+            paymentMethodTypeId, currencyId, createTransactionDto, userName);
 
         return Ok(transactionModel.ToTransactionDto());
     }
@@ -99,7 +55,7 @@ public class TransactionController:ControllerBase
     [HttpPut("{id}")]
     public async Task<IActionResult> UpdateTransaction([FromRoute] int id,[FromBody] UpdateTransactionDto updateTransactionDto)
     {
-        var transactionModel = await _transactionRepository.UpdateTransaction(id, updateTransactionDto.ToTransactionFromUpdateDto());
+        var transactionModel = await _transactionService.UpdateTransaction(id, updateTransactionDto.ToTransactionFromUpdateDto());
         if (transactionModel==null)
         {
             return NotFound("Transaction not found");
@@ -112,7 +68,7 @@ public class TransactionController:ControllerBase
     [HttpDelete("{id}")]
     public async Task<IActionResult> DeleteTransaction([FromRoute] int id)
     {
-        var transactionModel = await _transactionRepository.DeleteTransaction(id);
+        var transactionModel = await _transactionService.DeleteTransaction(id);
         if (transactionModel==null)
         {
             return NotFound("Transaction not found");
