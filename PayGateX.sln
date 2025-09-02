@@ -2,7 +2,13 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PayGateX", "PayGateX\PayGateX.csproj", "{2EE242E5-ECCC-43D3-B755-06094091A2E2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Entities", "Entities\Entities.csproj", "{08E34335-C68E-4CC7-A800-6EE6A55577DA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Repositories", "Repositories\Repositories.csproj", "{221876C5-2E47-4F9E-A1FA-AAE45DF022A7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceLayer", "ServiceLayer\ServiceLayer.csproj", "{35D59939-D70D-4CB9-8859-6DD2877F2992}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Entities", "Entities\Entities.csproj", "{42F09C67-7DA0-4774-B20B-BCB9E243309C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Presentation", "Presentation\Presentation.csproj", "{4C187730-32ED-4D64-8CBD-532014858463}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -14,9 +20,21 @@ Global
 		{2EE242E5-ECCC-43D3-B755-06094091A2E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2EE242E5-ECCC-43D3-B755-06094091A2E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2EE242E5-ECCC-43D3-B755-06094091A2E2}.Release|Any CPU.Build.0 = Release|Any CPU
-		{08E34335-C68E-4CC7-A800-6EE6A55577DA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{08E34335-C68E-4CC7-A800-6EE6A55577DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{08E34335-C68E-4CC7-A800-6EE6A55577DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{08E34335-C68E-4CC7-A800-6EE6A55577DA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{221876C5-2E47-4F9E-A1FA-AAE45DF022A7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{221876C5-2E47-4F9E-A1FA-AAE45DF022A7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{221876C5-2E47-4F9E-A1FA-AAE45DF022A7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{221876C5-2E47-4F9E-A1FA-AAE45DF022A7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{35D59939-D70D-4CB9-8859-6DD2877F2992}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{35D59939-D70D-4CB9-8859-6DD2877F2992}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{35D59939-D70D-4CB9-8859-6DD2877F2992}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{35D59939-D70D-4CB9-8859-6DD2877F2992}.Release|Any CPU.Build.0 = Release|Any CPU
+		{42F09C67-7DA0-4774-B20B-BCB9E243309C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{42F09C67-7DA0-4774-B20B-BCB9E243309C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{42F09C67-7DA0-4774-B20B-BCB9E243309C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{42F09C67-7DA0-4774-B20B-BCB9E243309C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4C187730-32ED-4D64-8CBD-532014858463}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4C187730-32ED-4D64-8CBD-532014858463}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4C187730-32ED-4D64-8CBD-532014858463}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4C187730-32ED-4D64-8CBD-532014858463}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

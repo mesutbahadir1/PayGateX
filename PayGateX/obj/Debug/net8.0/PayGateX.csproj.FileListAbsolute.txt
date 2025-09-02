@@ -306,3 +306,12 @@
 /Users/mesut/RiderProjects/PayGateX/PayGateX/obj/Debug/net8.0/ref/PayGateX.dll
 /Users/mesut/RiderProjects/PayGateX/PayGateX/bin/Debug/net8.0/Entities.dll
 /Users/mesut/RiderProjects/PayGateX/PayGateX/bin/Debug/net8.0/Entities.pdb
+/Users/mesut/RiderProjects/PayGateX/PayGateX/bin/Debug/net8.0/Repositories.dll
+/Users/mesut/RiderProjects/PayGateX/PayGateX/bin/Debug/net8.0/Repositories.pdb
+/Users/mesut/RiderProjects/PayGateX/PayGateX/bin/Debug/net8.0/Microsoft.Extensions.Diagnostics.Abstractions.dll
+/Users/mesut/RiderProjects/PayGateX/PayGateX/bin/Debug/net8.0/Microsoft.Extensions.Hosting.Abstractions.dll
+/Users/mesut/RiderProjects/PayGateX/PayGateX/bin/Debug/net8.0/Microsoft.Extensions.ObjectPool.dll
+/Users/mesut/RiderProjects/PayGateX/PayGateX/bin/Debug/net8.0/Presentation.dll
+/Users/mesut/RiderProjects/PayGateX/PayGateX/bin/Debug/net8.0/ServiceLayer.dll
+/Users/mesut/RiderProjects/PayGateX/PayGateX/bin/Debug/net8.0/Presentation.pdb
+/Users/mesut/RiderProjects/PayGateX/PayGateX/bin/Debug/net8.0/ServiceLayer.pdb

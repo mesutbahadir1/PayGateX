@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("PayGateX")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+76f32d4451df1ff5093b27c2e451c4e4ee90ac8b")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+7ac2fd5e912f9b8bf452a751945b2da50f128da7")]
 [assembly: System.Reflection.AssemblyProductAttribute("PayGateX")]
 [assembly: System.Reflection.AssemblyTitleAttribute("PayGateX")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

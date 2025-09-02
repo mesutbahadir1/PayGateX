@@ -43,11 +43,7 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "dependencies": {
-            "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
-              "target": "Package",
-              "version": "[8.0.11, )"
-            },
-            "Microsoft.Extensions.Identity.Core": {
+            "Microsoft.Extensions.Identity.Stores": {
               "target": "Package",
               "version": "[8.0.11, )"
             }
@@ -94,8 +90,14 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "/Users/mesut/RiderProjects/PayGateX/Entities/Entities.csproj": {
-                "projectPath": "/Users/mesut/RiderProjects/PayGateX/Entities/Entities.csproj"
+              "/Users/mesut/RiderProjects/PayGateX/Presentation/Presentation.csproj": {
+                "projectPath": "/Users/mesut/RiderProjects/PayGateX/Presentation/Presentation.csproj"
+              },
+              "/Users/mesut/RiderProjects/PayGateX/Repositories/Repositories.csproj": {
+                "projectPath": "/Users/mesut/RiderProjects/PayGateX/Repositories/Repositories.csproj"
+              },
+              "/Users/mesut/RiderProjects/PayGateX/ServiceLayer/ServiceLayer.csproj": {
+                "projectPath": "/Users/mesut/RiderProjects/PayGateX/ServiceLayer/ServiceLayer.csproj"
               }
             }
           }
@@ -179,6 +181,236 @@
             "Microsoft.AspNetCore.App": {
               "privateAssets": "none"
             },
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/Users/mesut/.dotnet/sdk/8.0.404/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/Users/mesut/RiderProjects/PayGateX/Presentation/Presentation.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Users/mesut/RiderProjects/PayGateX/Presentation/Presentation.csproj",
+        "projectName": "Presentation",
+        "projectPath": "/Users/mesut/RiderProjects/PayGateX/Presentation/Presentation.csproj",
+        "packagesPath": "/Users/mesut/.nuget/packages/",
+        "outputPath": "/Users/mesut/RiderProjects/PayGateX/Presentation/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/Users/mesut/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {
+              "/Users/mesut/RiderProjects/PayGateX/Entities/Entities.csproj": {
+                "projectPath": "/Users/mesut/RiderProjects/PayGateX/Entities/Entities.csproj"
+              },
+              "/Users/mesut/RiderProjects/PayGateX/ServiceLayer/ServiceLayer.csproj": {
+                "projectPath": "/Users/mesut/RiderProjects/PayGateX/ServiceLayer/ServiceLayer.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        }
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "dependencies": {
+            "Microsoft.AspNetCore.Authentication.JwtBearer": {
+              "target": "Package",
+              "version": "[8.0.11, )"
+            },
+            "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[8.0.11, )"
+            },
+            "Microsoft.AspNetCore.Mvc.Core": {
+              "target": "Package",
+              "version": "[2.3.0, )"
+            },
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[8.0.11, )"
+            },
+            "Microsoft.Extensions.Identity.Core": {
+              "target": "Package",
+              "version": "[8.0.11, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/Users/mesut/.dotnet/sdk/8.0.404/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/Users/mesut/RiderProjects/PayGateX/Repositories/Repositories.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Users/mesut/RiderProjects/PayGateX/Repositories/Repositories.csproj",
+        "projectName": "Repositories",
+        "projectPath": "/Users/mesut/RiderProjects/PayGateX/Repositories/Repositories.csproj",
+        "packagesPath": "/Users/mesut/.nuget/packages/",
+        "outputPath": "/Users/mesut/RiderProjects/PayGateX/Repositories/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/Users/mesut/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {
+              "/Users/mesut/RiderProjects/PayGateX/Entities/Entities.csproj": {
+                "projectPath": "/Users/mesut/RiderProjects/PayGateX/Entities/Entities.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        }
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "dependencies": {
+            "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[8.0.11, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/Users/mesut/.dotnet/sdk/8.0.404/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/Users/mesut/RiderProjects/PayGateX/ServiceLayer/ServiceLayer.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Users/mesut/RiderProjects/PayGateX/ServiceLayer/ServiceLayer.csproj",
+        "projectName": "ServiceLayer",
+        "projectPath": "/Users/mesut/RiderProjects/PayGateX/ServiceLayer/ServiceLayer.csproj",
+        "packagesPath": "/Users/mesut/.nuget/packages/",
+        "outputPath": "/Users/mesut/RiderProjects/PayGateX/ServiceLayer/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/Users/mesut/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {
+              "/Users/mesut/RiderProjects/PayGateX/Entities/Entities.csproj": {
+                "projectPath": "/Users/mesut/RiderProjects/PayGateX/Entities/Entities.csproj"
+              },
+              "/Users/mesut/RiderProjects/PayGateX/Repositories/Repositories.csproj": {
+                "projectPath": "/Users/mesut/RiderProjects/PayGateX/Repositories/Repositories.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        }
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "dependencies": {
+            "Microsoft.IdentityModel.Tokens": {
+              "target": "Package",
+              "version": "[7.1.2, )"
+            },
+            "System.IdentityModel.Tokens.Jwt": {
+              "target": "Package",
+              "version": "[7.1.2, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }
