@@ -15,8 +15,9 @@ public class TransactionService:ITransactionService
     private readonly ITransactionTypeRepository _transactionTypeRepository;
     private readonly IPaymentMethodTypeRepository _paymentMethodTypeRepository;
     private readonly ICurrencyRepository _currencyRepository;
+    private readonly ILoggerService _loggerService;
     
-    public TransactionService(ITransactionRepository transactionRepository, UserManager<AppUser> userManager, ICardRepository cardRepository, ITransactionTypeRepository transactionTypeRepository, IPaymentMethodTypeRepository paymentMethodTypeRepository, ICurrencyRepository currencyRepository)
+    public TransactionService(ITransactionRepository transactionRepository, UserManager<AppUser> userManager, ICardRepository cardRepository, ITransactionTypeRepository transactionTypeRepository, IPaymentMethodTypeRepository paymentMethodTypeRepository, ICurrencyRepository currencyRepository, ILoggerService loggerService)
     {
         _transactionRepository = transactionRepository;
         _userManager = userManager;
@@ -24,6 +25,7 @@ public class TransactionService:ITransactionService
         _transactionTypeRepository = transactionTypeRepository;
         _paymentMethodTypeRepository = paymentMethodTypeRepository;
         _currencyRepository = currencyRepository;
+        _loggerService = loggerService;
     }
     
     public async Task<List<Transaction>> GetAllTransaction()
@@ -45,8 +47,10 @@ public class TransactionService:ITransactionService
 
         var isCardExist = await _cardRepository.IsCardExist(cardId);
         if (!isCardExist)
+        {
+            _loggerService.LogInfo($"The card with {cardId} didn't found.");
             return null;
-        
+        }
         
         var isTransactionTypeExist = await _transactionTypeRepository.IsTransactionTypeExist(transactionTypeId);
         if (!isTransactionTypeExist)

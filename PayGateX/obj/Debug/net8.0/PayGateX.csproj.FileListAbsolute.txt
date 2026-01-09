@@ -315,3 +315,6 @@
 /Users/mesut/RiderProjects/PayGateX/PayGateX/bin/Debug/net8.0/ServiceLayer.dll
 /Users/mesut/RiderProjects/PayGateX/PayGateX/bin/Debug/net8.0/Presentation.pdb
 /Users/mesut/RiderProjects/PayGateX/PayGateX/bin/Debug/net8.0/ServiceLayer.pdb
+/Users/mesut/RiderProjects/PayGateX/PayGateX/bin/Debug/net8.0/nlog.config
+/Users/mesut/RiderProjects/PayGateX/PayGateX/bin/Debug/net8.0/NLog.dll
+/Users/mesut/RiderProjects/PayGateX/PayGateX/bin/Debug/net8.0/NLog.Extensions.Logging.dll

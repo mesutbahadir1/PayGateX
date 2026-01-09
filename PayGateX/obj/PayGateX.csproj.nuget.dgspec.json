@@ -394,6 +394,10 @@
               "target": "Package",
               "version": "[7.1.2, )"
             },
+            "NLog.Extensions.Logging": {
+              "target": "Package",
+              "version": "[6.0.3, )"
+            },
             "System.IdentityModel.Tokens.Jwt": {
               "target": "Package",
               "version": "[7.1.2, )"

@@ -8,9 +8,13 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using NLog;
 using PayGateX.Service.Contracts;
 
 var builder = WebApplication.CreateBuilder(args);
+
+
+LogManager.Setup().LoadConfigurationFromFile(Path.Combine(Directory.GetCurrentDirectory(), "nlog.config"));
 
 // Add services to the container.
 builder.Services.AddControllers()
@@ -116,7 +120,7 @@ builder.Services.AddScoped<IProductTypeService, ProductTypeService>();
 builder.Services.AddScoped<ITransactionTypeService, TransactionTypeService>();
 builder.Services.AddScoped<ICustomerService, CustomerService>();
 builder.Services.AddScoped<ITransactionService, TransactionService>();
-
+builder.Services.AddSingleton<ILoggerService, LoggerService>();
 
 
 var app = builder.Build();

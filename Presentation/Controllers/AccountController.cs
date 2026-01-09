@@ -86,16 +86,12 @@ public class AccountController:ControllerBase
     {
         var user = await _userManager.Users.FirstOrDefaultAsync(x => x.UserName == loginDto.UserName);
         if (user == null)
-        {
             return Unauthorized("User not found");
-        }
 
         var result = await _signInManager.CheckPasswordSignInAsync(user, loginDto.Password!, false);
 
         if (!result.Succeeded)
-        {
             return Unauthorized("User name not found or password incorrect");
-        }
 
         return Ok(new NewUserDto
         {

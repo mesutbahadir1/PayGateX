@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "vbaH/BN3l+8=",
+  "dgSpecHash": "iv0QJYvx2I0=",
   "success": true,
   "projectFilePath": "/Users/mesut/RiderProjects/PayGateX/PayGateX/PayGateX.csproj",
   "expectedPackageFiles": [
@@ -71,6 +71,8 @@
     "/Users/mesut/.nuget/packages/mono.texttemplating/2.2.1/mono.texttemplating.2.2.1.nupkg.sha512",
     "/Users/mesut/.nuget/packages/newtonsoft.json/13.0.3/newtonsoft.json.13.0.3.nupkg.sha512",
     "/Users/mesut/.nuget/packages/newtonsoft.json.bson/1.0.2/newtonsoft.json.bson.1.0.2.nupkg.sha512",
+    "/Users/mesut/.nuget/packages/nlog/6.0.3/nlog.6.0.3.nupkg.sha512",
+    "/Users/mesut/.nuget/packages/nlog.extensions.logging/6.0.3/nlog.extensions.logging.6.0.3.nupkg.sha512",
     "/Users/mesut/.nuget/packages/npgsql/8.0.7/npgsql.8.0.7.nupkg.sha512",
     "/Users/mesut/.nuget/packages/npgsql.entityframeworkcore.postgresql/8.0.11/npgsql.entityframeworkcore.postgresql.8.0.11.nupkg.sha512",
     "/Users/mesut/.nuget/packages/sqlitepclraw.bundle_e_sqlite3/2.1.6/sqlitepclraw.bundle_e_sqlite3.2.1.6.nupkg.sha512",
