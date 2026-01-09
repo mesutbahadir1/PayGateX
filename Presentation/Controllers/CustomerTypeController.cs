@@ -49,9 +49,7 @@ public class CustomerTypeController:ControllerBase
     {
         var updateCustomerType = await _customerTypeService.Update(id, customerTypeDto.ToCustomerTypeFromUpdateDto());
         if (updateCustomerType==null)
-        {
             return NotFound("Customer type not found");
-        }
         return Ok(updateCustomerType.ToCustomerTypeDto());
     }
 
@@ -60,9 +58,7 @@ public class CustomerTypeController:ControllerBase
     {
         var deletedCustomerType = await _customerTypeService.Delete(id);
         if (deletedCustomerType == null)
-        {
             return NotFound("Customer Type not found");
-        }
         return Ok(deletedCustomerType.ToCustomerTypeDto());
     }
 }

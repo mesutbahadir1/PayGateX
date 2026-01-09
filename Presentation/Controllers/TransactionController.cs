@@ -33,14 +33,12 @@ public class TransactionController:ControllerBase
     {
         var transaction = await _transactionService.GetTransactionById(id);
         if (transaction==null)
-        {
             return NotFound("Transaction doesn't exist");
-        }
 
         return Ok(transaction.ToTransactionDto());
     }
     
-    [Authorize]
+    [Authorize(Roles = "Admin")]
     [HttpPost("{cardId}/{transactionTypeId}/{paymentMethodTypeId}/{currencyId}")]
     public async Task<IActionResult> CreateTransaction([FromRoute] int cardId,[FromRoute] int transactionTypeId,[FromRoute] int paymentMethodTypeId,
         [FromRoute] int currencyId,[FromBody] CreateTransactionDto createTransactionDto)
@@ -48,6 +46,8 @@ public class TransactionController:ControllerBase
         var userName = User.GetUserName();
         var transactionModel = await _transactionService.CreateTransaction(cardId, transactionTypeId,
             paymentMethodTypeId, currencyId, createTransactionDto, userName);
+        if (transactionModel == null)
+            return BadRequest("Kart limiti yetersiz.");
 
         return Ok(transactionModel.ToTransactionDto());
     }
@@ -57,9 +57,7 @@ public class TransactionController:ControllerBase
     {
         var transactionModel = await _transactionService.UpdateTransaction(id, updateTransactionDto.ToTransactionFromUpdateDto());
         if (transactionModel==null)
-        {
             return NotFound("Transaction not found");
-        }
 
         return Ok(transactionModel.ToTransactionDto());
     }
@@ -70,9 +68,7 @@ public class TransactionController:ControllerBase
     {
         var transactionModel = await _transactionService.DeleteTransaction(id);
         if (transactionModel==null)
-        {
             return NotFound("Transaction not found");
-        }
 
         return Ok(transactionModel.ToTransactionDto());
     }

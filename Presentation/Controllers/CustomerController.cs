@@ -34,9 +34,7 @@ public class CustomerController:ControllerBase
     {
         var customer = await _customerService.GetCustomerById(id);
         if (customer==null)
-        {
             return NotFound("Customer doesn't exist");
-        }
 
         return Ok(customer.ToCustomerDto());
     }
@@ -47,15 +45,11 @@ public class CustomerController:ControllerBase
     {
         var customerCards = await _customerService.GetCustomerCards(customerId);
         if (customerCards==null)
-        {
             return NotFound("Customer doesn't exist or there is no card for this customer.");
-        }
 
         var customerCardsDto = customerCards.Select(x => x.ToCardDto());
         return Ok(customerCardsDto);
     }
-    
-    
     
     
     [Authorize]
@@ -65,9 +59,7 @@ public class CustomerController:ControllerBase
         var userName = User.GetUserName();
         var customerModel= await _customerService.CreateCustomer(customerTypeId,createCustomerDto,userName);
         if (customerModel==null)
-        {
             return BadRequest("Customer not created. Check the information.");
-        }
 
         return Ok(customerModel.ToCustomerDto());
     }
@@ -78,9 +70,7 @@ public class CustomerController:ControllerBase
     {
         var customerModel = await _customerService.UpdateCustomer(id, updateCustomerDto.ToCustomerFromUpdateDto());
         if (customerModel==null)
-        {
             return NotFound("Customer not found");
-        }
 
         return Ok(customerModel.ToCustomerDto());
     }
@@ -91,9 +81,7 @@ public class CustomerController:ControllerBase
     {
         var customerModel = await _customerService.DeleteCustomer(id);
         if (customerModel==null)
-        {
             return NotFound("Customer not found");
-        }
 
         return Ok(customerModel.ToCustomerDto());
     }

@@ -58,9 +58,8 @@ public class CardTypeController:ControllerBase
     {
         var deletedCardType = await _cardTypeService.Delete(id);
         if (deletedCardType == null)
-        {
             return NotFound("Card Type not found");
-        }
+        
         return Ok(deletedCardType.ToCardTypeDto());
     }
     

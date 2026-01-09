@@ -34,9 +34,7 @@ public class CardController:ControllerBase
     {
         var card = await _cardService.GetCardById(id);
         if (card==null)
-        {
             return NotFound("Card doesn't exist");
-        }
 
         return Ok(card.ToCardDto());
     }
@@ -51,9 +49,7 @@ public class CardController:ControllerBase
         var cardModel = await _cardService.CreateCard(customerId, cardTypeId, cardStatusId, productTypeId,
             createCardDto, userName);
         if (cardModel==null)
-        {
             return BadRequest("Card not created. Check the information.");
-        }
 
         return Ok(cardModel.ToCardDto());
     }
@@ -63,9 +59,7 @@ public class CardController:ControllerBase
     {
         var cardModel = await _cardService.UpdateCard(id, updateCardDto.ToCardFromUpdateDto());
         if (cardModel==null)
-        {
             return NotFound("Card not found");
-        }
 
         return Ok(cardModel.ToCardDto());
     }
@@ -76,9 +70,7 @@ public class CardController:ControllerBase
     {
         var cardModel = await _cardService.DeleteCard(id);
         if (cardModel==null)
-        {
             return NotFound("Card not found");
-        }
 
         return Ok(cardModel.ToCardDto());
     }
